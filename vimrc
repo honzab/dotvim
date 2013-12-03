@@ -3,35 +3,15 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle "msanders/snipmate.vim"
-Bundle "timcharper/textile.vim"
-Bundle "tpope/vim-haml"
 Bundle "tpope/vim-markdown"
-Bundle "tpope/vim-vividchalk"
 Bundle "tsaleh/vim-supertab"
-Bundle "jnwhiteh/vimerl"
 Bundle "jnwhiteh/vim-golang"
 Bundle "vim-scripts/wombat256.vim"
 Bundle "vim-scripts/IndexedSearch"
 Bundle "vim-scripts/Gist.vim"
 Bundle "bronson/vim-trailing-whitespace"
-Bundle "vim-scripts/vibrantink"
 Bundle "vim-scripts/The-NERD-tree"
-Bundle "jnwhiteh/taglist.vim"
-Bundle "xolox/vim-misc"
-Bundle "xolox/vim-easytags"
-Bundle "vim-scripts/tagexplorer.vim"
-Bundle "tpope/vim-fugitive"
-Bundle "vim-scripts/Gundo"
-Bundle "vim-scripts/Solarized"
-Bundle "jnwhiteh/latexmenu"
-Bundle "vimoutliner/vimoutliner"
-Bundle "mattn/webapi-vim"
-Bundle "mattn/goplayground-vim"
-Bundle "sickill/vim-monokai"
-Bundle "fholgado/Molokai2"
 Bundle "kien/ctrlp.vim"
-Bundle "LaTeX-Box-Team/LaTeX-Box"
 Bundle "tpope/vim-sensible"
 Bundle "bling/vim-airline"
 Bundle "scrooloose/syntastic"
@@ -62,27 +42,24 @@ set switchbuf=usetab,newtab     " re-use a tab/window otherwise open a new taib
 
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
-" Set region to British English
-set spelllang=en_gb
+set spelllang=en_us
 
 " Autocommand rules for a few common files
 au BufNewFile,BufRead *.txt,*.html,README,*.tex setlocal spell
 au BufNewFile,BufRead wscript set filetype=python
-
-" Make sure .tex is interpreted as a 'latex' file
-let g:tex_flavor="latex"
-let g:LatexBox_latexmk_async=1
 
 au FileType text setlocal textwidth=78
 au FileType markdown setlocal ai formatoptions+=cqrt comments=n:&gt;
 au FileType lua setlocal nu si tabstop=4 ruler laststatus=2 showmode noexpandtab formatoptions-=t textwidth=78 formatoptions+=c
 au FileType go setlocal nu si tabstop=4 ruler laststatus=2 showmode noexpandtab formatoptions-=t textwidth=78 formatoptions+=c
 au FileType go setlocal makeprg=go\ install\ %:h
+au FileType go autocmd BufWritePre <buffer> Fmt
 au FileType lua setlocal nu si tabstop=4 ruler laststatus=2 showmode noexpandtab formatoptions-=t textwidth=78 formatoptions+=c
 au FileType erlang let g:erlangCompiler="erlc"
 
 set showmode
 set number
+set pastetoggle=<F2>
 
 " Change to the current file's directory
 command -nargs=0 Cd cd %:p:h
@@ -94,15 +71,23 @@ if has("autocmd") && exists("+omnifunc")
     \   endif
 endif
 
-nnoremap <leader>d :NERDTreeToggle<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>f :NERDTreeFind<cr>
-
-nnoremap <leader>l :TlistToggle<CR>
-nnoremap <leader>e :TagExplorer<CR>
-nnoremap <leader>u :GundoToggle<CR>
 
 " Map control-backspace to delete previous word
 imap <C-BS> <C-W>
+
+" Bind nohl
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" bind Ctrl+<movement> keys to move around the windows, instead of using
+" Ctrl+w + <movement>
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
 " Custom status line
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
@@ -121,17 +106,10 @@ augroup resCur
 augroup END
 
 set t_Co=256
-
-" Set Control-A to select all in the file
-noremap  <C-A>  gggH<C-O>G
-inoremap <C-A>  <C-O>gg<C-O>gH<C-O>G
-cnoremap <C-A>  <C-C>gggH<C-O>G
-onoremap <C-A>  <C-C>gggH<C-O>G
-snoremap <C-A>  <C-C>gggH<C-O>G
-xnoremap <C-A>  <C-C>ggVG
+colorscheme wombat256mod
 
 if exists('+colorcolumn')
-    set colorcolumn=80
+    au FileType python setlocal colorcolumn=80
 else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
