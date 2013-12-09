@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if ! [ -f $HOME/.vimrc ]; then
+    ln -s $HOME/.vim/vimrc $HOME/.vimrc
+fi
+
+if ! [ -d $HOME/.vim/bundle/vundle ]; then
+    cd $HOME/.vim
+    git clone https://github.com/gmarik/vundle.git bundle/vundle
+fi
