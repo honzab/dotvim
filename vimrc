@@ -14,6 +14,7 @@ Plugin 'fatih/vim-go'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
 
 filetype plugin indent on
 syntax on
@@ -30,6 +31,7 @@ set shiftwidth=4				" Set autoindent width to 4
 set expandtab 					" Don't use tabs, use spaces instead
 set smarttab					" Turn on smart tabbing
 set switchbuf=usetab,newtab     " re-use a tab/window otherwise open a new taib
+set nowrap
 
 set showmode
 set number
@@ -67,9 +69,12 @@ au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
 " Custom status line
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-set background=dark
-colorscheme solarized
+colorscheme tomorrow-night
 
 if exists('+colorcolumn')
     au FileType python setlocal colorcolumn=80
+endif
+
+if $COLORTERM == 'gnome-terminal'
+    set t_Co=256
 endif
