@@ -15,6 +15,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
 filetype plugin indent on
 syntax on
@@ -69,7 +70,7 @@ au Filetype go nnoremap <leader>t :tab split <CR>:exe "GoDef"<CR>
 " Custom status line
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
-colorscheme tomorrow-night
+colorscheme Tomorrow-Night
 
 if exists('+colorcolumn')
     au FileType python setlocal colorcolumn=80
