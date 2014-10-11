@@ -1,6 +1,6 @@
 ## Installation
 
-    git clone git://github.com/jnwhiteh/dotvim.git ~/.vim
+    git clone git://github.com/honzab/dotvim.git ~/.vim
     ln -s $HOME/.vim/vimrc $HOME/.vimrc
     ln -s $HOME/.vim/gvimrc $HOME/.gvimrc
     cd $HOME/.vim
